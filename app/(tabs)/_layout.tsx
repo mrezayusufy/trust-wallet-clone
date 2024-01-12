@@ -1,55 +1,87 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable, useColorScheme } from 'react-native';
+"use client";
+import React from "react";
+import { Ionicons } from "@expo/vector-icons";
+import { Link, Stack, Tabs } from "expo-router";
+import { SafeAreaView, StyleSheet, View } from "react-native";
+import Colors from "../../src/constants/Colors";
 
-import Colors from '../../constants/Colors';
-
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name: React.ComponentType<typeof Ionicons>["name"];
   color: string;
 }) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+  // @ts-ignore
+  return <Ionicons size={24} style={{ marginBottom: -3 }} {...props} />;
 }
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="two"
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-    </Tabs>
+      <SafeAreaView className="flex-1">
+        <Stack.Screen options={{ statusBarColor: Colors.light.primary}}/>
+        <Tabs
+          screenOptions={{
+            tabBarStyle: styles.header,            
+            tabBarLabelStyle: styles.labelStyle,
+            tabBarInactiveTintColor: "gray", 
+            tabBarActiveTintColor: Colors.light.primaryTint,
+            headerShown: true,
+          }}
+        >
+          <Tabs.Screen
+            name="index"
+            options={{
+              headerStyle: styles.screenHeader, 
+              title: "Wallet",
+              headerTitle: "",
+              headerShadowVisible: false,
+              tabBarIcon: ({ color }: {color: string}) => <TabBarIcon name="shield" color={color} />,
+              headerLeft: () => (<View className="px-5"><TabBarIcon name="notifications-outline" color={Colors.light.textLight}/></View>),
+              headerRight: () => (<View className="px-5"><TabBarIcon name="options-outline" color={Colors.light.textLight}/></View>),
+            }}
+          />
+          <Tabs.Screen
+            name="discover"
+            options={{
+              title: "Discover",
+              tabBarIcon: ({ color }: {color: string}) => (
+                <TabBarIcon name="compass" color={color} />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="browser"
+            options={{
+              title: "Browser",
+              tabBarIcon: ({ color }: {color: string}) => (
+                <TabBarIcon name="grid" color={color} />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="settings"
+            options={{
+              title: "Settings",
+              tabBarIcon: ({ color }: {color: string}) => (
+                <TabBarIcon name="settings-sharp" color={color} />
+              ),
+            }}
+          />
+        </Tabs>
+      </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  screenHeader: {
+    backgroundColor: Colors.light.primary, 
+  },
+  header: {
+    minHeight: 65,
+    paddingVertical: 10,
+  },
+  labelStyle: {
+    fontSize: 12,
+    fontWeight: "500",
+    paddingBottom: 10
+  }
+});
