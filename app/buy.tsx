@@ -3,18 +3,8 @@ import { View, TextInput } from "react-native"
 import { Stack } from "expo-router" 
 import CoinsList from "../src/components/CoinsList"
 import Colors from "../src/constants/Colors"
-// import { useSQLiteContext } from 'expo-sqlite/next';
 
-const BuyScreen = () => {
-    // const db = useSQLiteContext();
-    // const [coins, setCoins] = React.useState<ICoin[]>(); 
-    // React.useEffect(() => {
-    //     async function setup() {
-    //         const result = await db.getAllAsync<ICoin>('SELECT * FROM coins');
-    //         setCoins(result);
-    //     }
-    //     setup(); 
-    // }, []);
+const BuyScreen = () => { 
     return <View>
         <Stack.Screen options={{
             headerStyle: {

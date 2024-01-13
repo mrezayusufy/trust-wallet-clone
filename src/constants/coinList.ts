@@ -10,6 +10,16 @@ interface ICoin {
   }
 const coinList : ICoin[]= [
     {
+      icon: require("../../assets/coins/usdt.webp"),
+      title: "Tether USD",
+      amount: 1.0,
+      coin: "USDT",
+      fiat: 0.99,
+      currency: "USDT",
+      price: 0.99,
+      percentage: "-0.06%"
+    },
+    {
       icon: require("../../assets/coins/10000714.webp"),
       title: "Smart Chain",
       amount: 0.037896,

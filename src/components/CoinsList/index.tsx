@@ -1,8 +1,7 @@
 "use client"
 import React, { Suspense } from 'react';
-import { Text, View, TouchableOpacity, ScrollView, Pressable } from 'react-native';
+import { Text, View, ScrollView, Pressable } from 'react-native';
 import { Image } from 'expo-image';
-// import { useSQLiteContext } from 'expo-sqlite/next';
 import { Link } from 'expo-router';
 import { coinList, ICoin } from '../../constants/coinList';
 
@@ -10,16 +9,7 @@ interface coinListProps {
   amount?: number;
 }
 
-const CoinsList = ({amount = -1} : coinListProps) => {
-  // const [coins, setCoins] = React.useState<ICoin[]>([]);
-  // const db = useSQLiteContext();
-  // React.useEffect(() => {
-  //   async function setup() {
-  //     const result = await db.getAllAsync<ICoin>('SELECT * FROM coins');
-  //     setCoins(result);
-  //   }
-  // setup(); 
-  // },[])
+const CoinsList = ({amount = -1} : coinListProps) => { 
   return (
       <Suspense fallback={<Text>Loading...</Text>}>
         <ScrollView className='px-5'>
